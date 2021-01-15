@@ -1,4 +1,4 @@
-package request;
+package postItem.request;
 
 public class PostRequest {
   String body;

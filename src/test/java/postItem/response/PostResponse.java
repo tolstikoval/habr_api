@@ -1,4 +1,4 @@
-package response;
+package postItem.response;
 
 public class PostResponse {
   private String title;
