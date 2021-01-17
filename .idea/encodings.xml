@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/build.gradle" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/test/java/postItem/methods/PostMethods.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/java/postItem/request/PostRequest.java" charset="UTF-8" />
   </component>
 </project>

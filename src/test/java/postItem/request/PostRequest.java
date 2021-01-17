@@ -1,5 +1,8 @@
 package postItem.request;
 
+import io.restassured.response.ValidatableResponse;
+import postItem.methods.PostMethods;
+
 public class PostRequest {
   String body;
   long userId;
@@ -53,10 +56,12 @@ public class PostRequest {
   }
 
   public static void main(String[] args) {
-    PostRequest postRequest = new PostRequest();
+ /* PostRequest postRequest = new PostRequest();
     postRequest = postRequest.buildPostRequest();
     System.out.println(postRequest.title);
     System.out.println(postRequest.body);
-    System.out.println(postRequest.userId);
+    System.out.println(postRequest.userId);*/
+    PostMethods postMethods = new PostMethods();
+     postMethods.get();
   }
 }

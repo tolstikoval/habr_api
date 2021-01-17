@@ -1,20 +1,43 @@
 package postItem.methods;
 
 import io.restassured.RestAssured;
+import static io.restassured.RestAssured.given;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 public class PostMethods {
-  public static Response getThePost() {
-    Response response = RestAssured.given()
+  public Response getRaw() {
+    Response response = given()
             .contentType("application/json")
-            .log().all()
             .header("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3")
-            .header("Cookie", "__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+            .cookies( "__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
             .when()
+            .log().all()
             .get("https://jsonplaceholder.typicode.com/posts/15");
     return response;
   }
+public ValidatableResponse get() {
+    Response response = getRaw();
+    ValidatableResponse validatableResponse = response.then()
+            .log().all().statusCode(200);
+    return validatableResponse;
+}
+
+
+
+/* public static ValidatableResponse getThePost() {
+    ValidatableResponse response = RestAssured.given()
+            .contentType("application/json")
+            .header("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3")
+            .header("Cookie", "__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+            .when()
+            .log().all()
+            .get("https://jsonplaceholder.typicode.com/posts/15")
+            .then()
+            .log().all()
+            .statusCode(200);
+    return response;
+  }*/
 
   public static Response getPosts() {
     Response response = RestAssured.given()
