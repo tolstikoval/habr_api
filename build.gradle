@@ -11,6 +11,7 @@ repositories {
 dependencies {
     testImplementation 'io.rest-assured:rest-assured:4.0.0'
     implementation 'org.testng:testng:7.3.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
 }
 test {
     useTestNG()

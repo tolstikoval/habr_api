@@ -40,7 +40,7 @@ public class PostRequest {
     postRequest
             .setTitle("title for test " + generateTitle(6))
             .setBody("foo")
-            .setUserId(1);
+            .setUserId(1l);
     return postRequest;
   }
 
@@ -62,6 +62,18 @@ public class PostRequest {
     System.out.println(postRequest.body);
     System.out.println(postRequest.userId);*/
     PostMethods postMethods = new PostMethods();
-     postMethods.get();
+   // postMethods.deleteRaw();
+    PostRequest postRequest, postRequest1;
+     postRequest = new PostRequest().buildPostRequest();
+    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
+
+
+    postMethods.post(postRequest);
+    postMethods.post(postRequest1);
+
+/*    postMethods.getAll();
+    postMethods.post();
+    postMethods.put();
+    postMethods.delete();*/
   }
 }
