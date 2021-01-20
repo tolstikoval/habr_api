@@ -1,6 +1,9 @@
 package postItem.methods;
 
 import static io.restassured.RestAssured.given;
+
+import CommonResourse.ApiSpecification;
+import CommonResourse.EndPoints;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import postItem.request.PostRequest;
@@ -8,51 +11,29 @@ import postItem.response.PostResponse;
 
 
 public class PostMethods {
-/*  public PostMethods Spec() {
-
-    ResponseSpecification responseSpec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .expectBody(containsString("success"))
-            .build();
-
-    RestAssured.responseSpecification = responseSpec;
-    static RequestSpecification yourSpec = new RequestSpecBuilder()
-            .setBaseUri()
-            .setPort()
-            .setAccept()
-            .setContentType()
-            .addHeader()
-            .build()
-  }
-  */
-
-  public static final String YOUR_POINT_ID = "https://jsonplaceholder.typicode.com/posts/{id}";
 
   public Response getByIdRaw(long id) {
     Response response = given()
-            .contentType("application/json")
-            .header("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3")
-            .cookie("__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+            .spec(ApiSpecification.requestSpec)
             .when()
             .log().all()
-            .get(YOUR_POINT_ID, id);
+            .get(EndPoints.POSTS_ID, id);
     return response;
   }
 
-public ValidatableResponse getById(long id) {
+  public PostResponse getById(long id) {
     Response response = getByIdRaw(id);
-    ValidatableResponse validatableResponse = response.then()
-            .log().all().statusCode(200);
-    return validatableResponse;
-}
+    PostResponse postResponse = response.then().log().all()
+            .extract().as(PostResponse.class);
+    return postResponse;
+  }
 
   public Response getAllRaw() {
     Response response = given()
-            .contentType("application/json")
-            .cookie("__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+            .spec(ApiSpecification.requestSpec)
             .when()
             .log().all()
-            .get("https://jsonplaceholder.typicode.com/posts");
+            .get(EndPoints.POSTS);
     return response;
   }
 
@@ -64,58 +45,50 @@ public ValidatableResponse getById(long id) {
   }
 
   public Response postRaw(PostRequest postRequest) {
-    Response response = given()
-            .contentType("application/json")
-            .cookie("__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+   Response response = given()
+            .spec(ApiSpecification.requestSpec)
             .body(postRequest)
             .when()
             .log().all()
-            .post("https://jsonplaceholder.typicode.com/posts");
+            .post(EndPoints.POSTS);
     return response;
   }
 
-  public PostResponse post(PostRequest postRequest) {
+    public PostRequest post(PostRequest postRequest) {
     Response response = postRaw(postRequest);
-    PostResponse postResponse= response.then()
-            .log().all().statusCode(201);
+    PostRequest postResponse = response.then()
+            .extract().response().as(PostRequest.class);
     return postResponse;
   }
 
-  public Response putRaw() {
+  public Response putByIdRaw(PostRequest postRequest, long id) {
     Response response = given()
-            .contentType("application/json; charset=UTF-8")
-            .cookie("__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
-            .body("{\n" +
-                    "\t\"method\": \"PUT\",\n" +
-                    "  \"id\": 1,\n  " +
-                    "  \"title\": \"foo\",\n  " +
-                    "  \"body\": \"bar\",\n  " +
-                    "  \"userId\": 1\n}")
+            .spec(ApiSpecification.requestSpec)
+            .body(postRequest)
             .when()
             .log().all()
-            .put("https://jsonplaceholder.typicode.com/posts/1");
+            .put(EndPoints.POSTS_ID, id);
     return response;
   }
 
-  public ValidatableResponse put() {
-    Response response = putRaw();
+  public ValidatableResponse put(PostRequest postRequest, long id) {
+    Response response = putByIdRaw(postRequest, id);
     ValidatableResponse validatableResponse = response.then()
             .log().all().statusCode(200);
     return validatableResponse;
   }
-//Request URI:	https://jsonplaceholder.typicode.com/posts/15?accept=*%2F*
-  public Response deleteRaw() {
+
+  public Response deleteByIdRaw(long id) {
     Response response = given()
-            .contentType("application/json")
-            .cookie("__cfduid=d251dc7412395e651ea7e6d6139bdaaf91610459685")
+            .spec(ApiSpecification.requestSpec)
             .when()
             .log().all()
-            .delete("https://jsonplaceholder.typicode.com/posts/15");
+            .delete(EndPoints.POSTS_ID, id);
     return response;
   }
 
-  public ValidatableResponse delete() {
-    Response response = deleteRaw();
+  public ValidatableResponse deleteById(long id) {
+    Response response = deleteByIdRaw(id);
     ValidatableResponse validatableResponse = response.then()
             .log().all().statusCode(200);
     return validatableResponse;

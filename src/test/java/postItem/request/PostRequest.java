@@ -2,6 +2,7 @@ package postItem.request;
 
 import io.restassured.response.ValidatableResponse;
 import postItem.methods.PostMethods;
+import postItem.response.PostResponse;
 
 public class PostRequest {
   String body;
@@ -63,16 +64,19 @@ public class PostRequest {
     System.out.println(postRequest.userId);*/
     PostMethods postMethods = new PostMethods();
    // postMethods.deleteRaw();
-    PostRequest postRequest, postRequest1;
-     postRequest = new PostRequest().buildPostRequest();
-    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
+//   PostRequest postRequest, postRequest1;
+//     postRequest = new PostRequest().buildPostRequest();
+//    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
+//
+//
+//    postMethods.post(postRequest);
+//    postMethods.post(postRequest1);
+    PostResponse postResponse;
+    postResponse = postMethods.getById(1);
+    postMethods.getById(10);
 
-
-    postMethods.post(postRequest);
-    postMethods.post(postRequest1);
-
-/*    postMethods.getAll();
-    postMethods.post();
+ //postMethods.getAll();
+   /*    postMethods.post();
     postMethods.put();
     postMethods.delete();*/
   }

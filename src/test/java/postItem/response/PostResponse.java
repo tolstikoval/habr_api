@@ -1,8 +1,8 @@
 package postItem.response;
 
 public class PostResponse {
-  private String title;
-  private String body;
-  private long userId;
-  private long id;
+  public String title;
+  public String body;
+  public long userId;
+  public long id;
 }
