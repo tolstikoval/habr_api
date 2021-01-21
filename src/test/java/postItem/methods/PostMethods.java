@@ -1,6 +1,9 @@
 package postItem.methods;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 import CommonResourse.ApiSpecification;
 import CommonResourse.EndPoints;
@@ -30,18 +33,17 @@ public class PostMethods {
   public Response getAllRaw() {
     Response response = given()
             .spec(ApiSpecification.requestSpec)
-            .when()
+            .when().log().all()
             .get(EndPoints.POSTS);
     return response;
   }
 
   //не работает
-  public PostResponse getAll() {
+  public PostResponse[] getAll() {
     Response response = getAllRaw();
-    PostResponse postResponse = response.then()
-            .extract().as(PostResponse.class);
-    ;
-    return postResponse;
+    PostResponse[] listPostResponse = response.then()
+            .extract().as(PostResponse[].class);
+    return listPostResponse;
   }
 
   public Response postRaw(PostRequest postRequest) {
