@@ -56,28 +56,28 @@ public class PostRequest {
     return sb.toString();
   }
 
-  public static void main(String[] args) {
+  //public static void main(String[] args) {
  /* PostRequest postRequest = new PostRequest();
     postRequest = postRequest.buildPostRequest();
     System.out.println(postRequest.title);
     System.out.println(postRequest.body);
     System.out.println(postRequest.userId);*/
-    PostMethods postMethods = new PostMethods();
-   // postMethods.deleteRaw();
+  //  PostMethods postMethods = new PostMethods();
+  // postMethods.deleteRaw();
 //   PostRequest postRequest, postRequest1;
 //     postRequest = new PostRequest().buildPostRequest();
 //    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
-//
-//
+//      postMethods.putById(postRequest1, 3);
 //    postMethods.post(postRequest);
 //    postMethods.post(postRequest1);
-    PostResponse postResponse;
-    postResponse = postMethods.getById(1);
-    postMethods.getById(10);
+//    PostResponse postResponse;
+  //   postMethods.deleteById(7);
+//    postResponse = postMethods.getById(1);
+  // postMethods.getById(10);
 
- //postMethods.getAll();
+  // postMethods.getAll();
    /*    postMethods.post();
-    postMethods.put();
+    postMethods.putById();
     postMethods.delete();*/
-  }
+// }
 }

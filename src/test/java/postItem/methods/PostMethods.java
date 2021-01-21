@@ -16,7 +16,6 @@ public class PostMethods {
     Response response = given()
             .spec(ApiSpecification.requestSpec)
             .when()
-            .log().all()
             .get(EndPoints.POSTS_ID, id);
     return response;
   }
@@ -32,32 +31,32 @@ public class PostMethods {
     Response response = given()
             .spec(ApiSpecification.requestSpec)
             .when()
-            .log().all()
             .get(EndPoints.POSTS);
     return response;
   }
 
-  public ValidatableResponse getAll() {
+  //не работает
+  public PostResponse getAll() {
     Response response = getAllRaw();
-    ValidatableResponse validatableResponse = response.then()
-            .log().all().statusCode(200);
-    return validatableResponse;
+    PostResponse postResponse = response.then()
+            .extract().as(PostResponse.class);
+    ;
+    return postResponse;
   }
 
   public Response postRaw(PostRequest postRequest) {
-   Response response = given()
+    Response response = given()
             .spec(ApiSpecification.requestSpec)
             .body(postRequest)
             .when()
-            .log().all()
             .post(EndPoints.POSTS);
     return response;
   }
 
-    public PostRequest post(PostRequest postRequest) {
+  public PostResponse post(PostRequest postRequest) {
     Response response = postRaw(postRequest);
-    PostRequest postResponse = response.then()
-            .extract().response().as(PostRequest.class);
+    PostResponse postResponse = response.then()
+            .extract().as(PostResponse.class);
     return postResponse;
   }
 
@@ -66,23 +65,21 @@ public class PostMethods {
             .spec(ApiSpecification.requestSpec)
             .body(postRequest)
             .when()
-            .log().all()
             .put(EndPoints.POSTS_ID, id);
     return response;
   }
 
-  public ValidatableResponse put(PostRequest postRequest, long id) {
+  public PostResponse putById(PostRequest postRequest, long id) {
     Response response = putByIdRaw(postRequest, id);
-    ValidatableResponse validatableResponse = response.then()
-            .log().all().statusCode(200);
-    return validatableResponse;
+    PostResponse postResponse = response.then().log().all()
+            .extract().as(PostResponse.class);
+    return postResponse;
   }
 
   public Response deleteByIdRaw(long id) {
     Response response = given()
             .spec(ApiSpecification.requestSpec)
             .when()
-            .log().all()
             .delete(EndPoints.POSTS_ID, id);
     return response;
   }
@@ -90,7 +87,7 @@ public class PostMethods {
   public ValidatableResponse deleteById(long id) {
     Response response = deleteByIdRaw(id);
     ValidatableResponse validatableResponse = response.then()
-            .log().all().statusCode(200);
+            .statusCode(200);
     return validatableResponse;
   }
 }
