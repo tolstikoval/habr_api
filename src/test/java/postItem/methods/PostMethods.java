@@ -15,11 +15,11 @@ import postItem.response.PostResponse;
 import java.util.Arrays;
 
 
-public class PostMethods {
+public class PostMethods extends ApiSpecification {
 
   public Response getByIdRaw(long id) {
     Response response = given()
-            .spec(ApiSpecification.requestSpec)
+            .spec(requestSpec)
             .when()
             .get(EndPoints.POSTS_ID, id);
     return response;
@@ -47,8 +47,8 @@ public class PostMethods {
     return listPostResponse;
   }
 
-  public PostResponse getObject(long id) {
-/*    PostResponse[] listPost = getAllRaw().as(PostResponse[].class);
+  public String getObject(long id) {
+/*   PostResponse[] listPost = getAllRaw().as(PostResponse[].class);
      Response response = getAllRaw();
     PostResponse p = Arrays.stream(listPost).filter(post -> id == (post.getId())).findFirst().orElse(null);*/
     // Arrays.stream(listPost).find//findFirst({ it.id == " + id + "});
@@ -57,8 +57,10 @@ public class PostMethods {
     //.then().log().all().extract().response().body().path("[id].first");
     //.path("find { it.id == 'id'}");
     Response response = getAllRaw();
-    PostResponse p = response.then().extract().path("[0]");
-    PostResponse p1 = response.then().extract().path("find {it.id == " + id + "}");
+    //PostResponse p = response.then().extract().path("[0]");
+    String  p1 =  response.then().log().all().extract().path("find {it.id == " + id + "}").toString();
+    System.out.println("рн врн лш онксвхкх");
+    System.out.println(p1);
     return p1;
   }
   public Response postRaw(PostRequest postRequest) {

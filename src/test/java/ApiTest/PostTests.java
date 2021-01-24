@@ -1,6 +1,7 @@
 package ApiTest;
 
 import io.restassured.response.Response;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,10 +19,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class PostTests {
   PostMethods postMethods = new PostMethods();
   PostResponse postResponse;
+  PostRequest postRequest1;
 
   @BeforeClass
   public void testData() {
-
+    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
   }
 
   @Test(description = "Проверка метода getAllRaw из класса PostMethods: код ответа, количество записей, ссответствие id")
@@ -59,15 +61,8 @@ public class PostTests {
     postResponse = response1.then().extract().as(PostResponse.class);
   }
 
-  @AfterTest
-  public void getByIdRawAfterTest() {
-    postMethods.deleteById(postResponse.id);
-  }
-
   @Test(description = "Проверка метода PostRaw из класса PostMethods: код ответа, соответствие полей")
   public void postRawTest() {
-    PostRequest postRequest1;
-    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
     Response response = postMethods.postRaw(postRequest1);
     response.then().log().all().statusCode(201)
             .body("userId", equalTo(12),
@@ -76,15 +71,9 @@ public class PostTests {
     postResponse = response.then().extract().as(PostResponse.class);
   }
 
-  @AfterTest
-  public void postAfterTest() {
-    postMethods.deleteById(postResponse.id);
-  }
 
   @Test(description = "Проверка метода PutByIdRaw из класса PostMethods: код ответа, соответствие полей")
   public void putByIdTest() {
-    PostRequest postRequest1;
-    postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
     Response response = postMethods.putByIdRaw(postRequest1, 5);
     response.then().log().all().statusCode(200)
             .body("userId", equalTo(12),
@@ -94,10 +83,18 @@ public class PostTests {
     postResponse = response.then().extract().as(PostResponse.class);
   }
 
-  @AfterTest
-  public void putByIdAfterTest() {
+  @Test(description = "Проверка метода deleteByIdRaw из класса PostMethods: код ответа")
+  public void deleteByIdTest() {
+    Response response = postMethods.deleteByIdRaw(5);
+    response.then().log().all().statusCode(200);
+    postResponse = response.then().extract().as(PostResponse.class);
+  }
+
+  @AfterClass
+  public void AfterTests() {
     postMethods.deleteById(postResponse.id);
   }
+
 
 }
 

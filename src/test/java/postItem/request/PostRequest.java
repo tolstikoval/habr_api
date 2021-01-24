@@ -1,8 +1,12 @@
 package postItem.request;
 
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
 import postItem.methods.PostMethods;
 import postItem.response.PostResponse;
+
+import static io.restassured.RestAssured.*;
 
 public class PostRequest {
   String body;
@@ -56,6 +60,7 @@ public class PostRequest {
     return sb.toString();
   }
 
+
   public static void main(String[] args) {
  /* PostRequest postRequest = new PostRequest();
     postRequest = postRequest.buildPostRequest();
@@ -73,12 +78,12 @@ public class PostRequest {
 //    PostResponse postResponse;
   //   postMethods.deleteById(7);
 //    postResponse = postMethods.getById(1);
-    PostResponse p;
+    String p;
 p =postMethods.getObject(4);
-    System.out.println(p.getId());
+   /* System.out.println(p.getId());
     System.out.println(p.getTitle());
     System.out.println(p.getUserId());
-    System.out.println(p.getBody());
+    System.out.println(p.getBody());*/
 
   // postMethods.getAll();
    /*    postMethods.post();
