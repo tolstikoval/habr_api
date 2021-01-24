@@ -12,6 +12,8 @@ import io.restassured.response.ValidatableResponse;
 import postItem.request.PostRequest;
 import postItem.response.PostResponse;
 
+import java.util.Arrays;
+
 
 public class PostMethods {
 
@@ -38,7 +40,6 @@ public class PostMethods {
     return response;
   }
 
-  //не работает
   public PostResponse[] getAll() {
     Response response = getAllRaw();
     PostResponse[] listPostResponse = response.then()
@@ -46,6 +47,20 @@ public class PostMethods {
     return listPostResponse;
   }
 
+  public PostResponse getObject(long id) {
+/*    PostResponse[] listPost = getAllRaw().as(PostResponse[].class);
+     Response response = getAllRaw();
+    PostResponse p = Arrays.stream(listPost).filter(post -> id == (post.getId())).findFirst().orElse(null);*/
+    // Arrays.stream(listPost).find//findFirst({ it.id == " + id + "});
+    // PostResponse [] listPost = response.then().log().all().extract().jsonPath().getJsonObject("find { it.id == " + id + "}");
+    //.then().log().all().extract().jsonPath().get("findAll {it.id == " + id + "}");
+    //.then().log().all().extract().response().body().path("[id].first");
+    //.path("find { it.id == 'id'}");
+    Response response = getAllRaw();
+    PostResponse p = response.then().extract().path("[0]");
+    PostResponse p1 = response.then().extract().path("find {it.id == " + id + "}");
+    return p1;
+  }
   public Response postRaw(PostRequest postRequest) {
     Response response = given()
             .spec(ApiSpecification.requestSpec)
