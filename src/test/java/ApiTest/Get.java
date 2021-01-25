@@ -1,16 +1,13 @@
 package ApiTest;
 
 import io.restassured.response.Response;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import postItem.methods.PostMethods;
 import postItem.response.PostResponse;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class Get {
-  PostMethods postMethods = new PostMethods();
-  PostResponse postResponse;
+public class Get extends TestBase {
+
 
   @Test(description = "Проверка метода getAllRaw из класса PostMethods: код ответа, количество записей, ссответствие id")
   public void getAllTest() {
@@ -40,11 +37,6 @@ public class Get {
                             + "repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error"));
 
     postResponse = response1.then().extract().as(PostResponse.class);
-  }
-
-  @AfterClass
-  public void AfterTests() {
-    postMethods.deleteById(postResponse.id);
   }
 
 }
