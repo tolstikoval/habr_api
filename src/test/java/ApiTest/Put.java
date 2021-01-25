@@ -10,8 +10,8 @@ import postItem.response.PostResponse;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
+public class Put {
 
-public class PostTests {
   PostMethods postMethods = new PostMethods();
   PostResponse postResponse;
   PostRequest postRequest1;
@@ -21,23 +21,19 @@ public class PostTests {
     postRequest1 = new PostRequest().setTitle("123").setBody("123432").setUserId(12l);
   }
 
-
-  @Test(description = "Проверка метода PostRaw из класса PostMethods: код ответа, соответствие полей")
-  public void postRawTest() {
-    Response response = postMethods.postRaw(postRequest1);
-    response.then().log().all().statusCode(201)
+  @Test(description = "Проверка метода PutByIdRaw из класса PostMethods: код ответа, соответствие полей")
+  public void putByIdTest() {
+    Response response = postMethods.putByIdRaw(postRequest1, 5);
+    response.then().log().all().statusCode(200)
             .body("userId", equalTo(12),
+                    "id", equalTo(5),
                     "title", equalTo("123"),
                     "body", equalTo("123432"));
     postResponse = response.then().extract().as(PostResponse.class);
   }
 
-
   @AfterClass
   public void AfterTests() {
     postMethods.deleteById(postResponse.id);
   }
-
-
 }
-
