@@ -1,4 +1,4 @@
-package ApiTest;
+package apiTest;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;

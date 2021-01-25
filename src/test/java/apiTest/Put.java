@@ -1,4 +1,4 @@
-package ApiTest;
+package apiTest;
 
 import io.restassured.response.Response;
 import org.testng.annotations.AfterClass;
@@ -7,8 +7,7 @@ import postItem.response.PostResponse;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class Put extends TestBase{
-
+public class Put extends TestBase {
 
   @Test(description = "Проверка метода PutByIdRaw из класса PostMethods: код ответа, соответствие полей")
   public void putByIdTest() {

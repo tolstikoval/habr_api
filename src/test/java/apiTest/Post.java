@@ -1,11 +1,10 @@
-package ApiTest;
+package apiTest;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import postItem.response.PostResponse;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-
 
 public class Post extends TestBase {
 

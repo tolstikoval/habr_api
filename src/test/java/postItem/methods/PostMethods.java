@@ -5,14 +5,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-import CommonResourse.ApiSpecification;
-import CommonResourse.EndPoints;
+import commonResourse.ApiSpecification;
+import commonResourse.EndPoints;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import postItem.request.PostRequest;
 import postItem.response.PostResponse;
-
-import java.util.Arrays;
 
 
 public class PostMethods extends ApiSpecification {

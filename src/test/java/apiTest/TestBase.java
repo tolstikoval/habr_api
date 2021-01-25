@@ -1,4 +1,4 @@
-package ApiTest;
+package apiTest;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -7,7 +7,7 @@ import postItem.request.PostRequest;
 import postItem.response.PostResponse;
 
 public class TestBase {
-  
+
   PostMethods postMethods = new PostMethods();
   PostResponse postResponse;
   PostRequest postRequest1;

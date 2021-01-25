@@ -1,4 +1,4 @@
-package CommonResourse;
+package commonResourse;
 
 public class EndPoints {
   public static final String POSTS_ID = "/posts/{id}";

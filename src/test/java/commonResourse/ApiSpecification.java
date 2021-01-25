@@ -1,4 +1,4 @@
-package CommonResourse;
+package commonResourse;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;

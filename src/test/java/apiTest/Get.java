@@ -1,4 +1,4 @@
-package ApiTest;
+package apiTest;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -7,7 +7,6 @@ import postItem.response.PostResponse;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class Get extends TestBase {
-
 
   @Test(description = "Проверка метода getAllRaw из класса PostMethods: код ответа, количество записей, ссответствие id")
   public void getAllTest() {
