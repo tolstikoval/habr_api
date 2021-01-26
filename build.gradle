@@ -1,7 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-//group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -15,8 +14,9 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.15'
 }
 task testGet (type: Test) {
+//    systemProperties = System.properties
     useTestNG() {
-        suites 'resources/testngGet.xml'
+        suites 'src/test/resources/testngGet.xml'
     }
 }
 task testPut (type: Test) {
