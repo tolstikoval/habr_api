@@ -56,7 +56,7 @@ public class PostMethods extends ApiSpecification {
     //.path("find { it.id == 'id'}");
     Response response = getAllRaw();
     //PostResponse p = response.then().extract().path("[0]");
-    String  p1 =  response.then().log().all().extract().path("find {it.id == " + id + "}").toString();
+    String  p1 =  response.then().log().all().extract().path("find {it.id == " + id + "}");
     System.out.println("рн врн лш онксвхкх");
     System.out.println(p1);
     return p1;

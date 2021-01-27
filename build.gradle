@@ -12,15 +12,18 @@ dependencies {
     implementation 'org.testng:testng:7.3.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
     implementation 'com.thoughtworks.xstream:xstream:1.4.15'
+    compile group: 'org.aeonbits.owner', name: 'owner-java8', version: '1.0.12'
 }
 task testGet (type: Test) {
-//    systemProperties = System.properties
+    systemProperties = System.properties
     useTestNG() {
         suites 'src/test/resources/testngGet.xml'
     }
 }
 task testPut (type: Test) {
+   // systemProperty = System.properties
     useTestNG() {
         suites 'resources/testngPut.xml'
     }
+    //systemProperty 'baseUrl', "$baseUrl"
 }
