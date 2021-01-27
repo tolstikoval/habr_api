@@ -1,5 +1,6 @@
 package commonResourse;
 
+import com.sun.javafx.runtime.SystemProperties;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -17,7 +18,8 @@ public class ApiSpecification  {
   public static TestConfig testConfig = ConfigFactory.create(TestConfig.class);
   public static String baseUrl = testConfig.baseUrl();
 
-/* public static final String PATH_TO_PROPERTIES = "src/test/resources/config.properties";
+
+/* public static final String PATH_TO_PROPERTIES = "src/test/resources/MyConfig.properties";
  private final Properties prop = new Properties();*/
 
 /*  public void init() throws IOException {

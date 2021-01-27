@@ -15,15 +15,16 @@ dependencies {
     compile group: 'org.aeonbits.owner', name: 'owner-java8', version: '1.0.12'
 }
 task testGet (type: Test) {
-    systemProperties = System.properties
     useTestNG() {
         suites 'src/test/resources/testngGet.xml'
-    }
-}
+        options {
+            systemProperties(System.getProperties())
+        }
+    }   }
+
 task testPut (type: Test) {
-   // systemProperty = System.properties
+   systemProperties = System.properties
     useTestNG() {
-        suites 'resources/testngPut.xml'
+        suites 'src/test/resources/testngPut.xml'
     }
-    //systemProperty 'baseUrl', "$baseUrl"
 }

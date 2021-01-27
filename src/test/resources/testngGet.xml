@@ -7,5 +7,4 @@
             <class name="apiTest.Post"/>
         </classes>
     </test>
-
 </suite>
